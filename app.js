@@ -9,13 +9,18 @@ square.style.margin = "0"
 
 let size = 16;
 
+
 for (i=0 ; i<size*size ; i++) {
+    function activeHover (e) {
+        clone.classList.add('hover')
+    }
 
     const clone = square.cloneNode(true);
     container.appendChild(clone);
-    clone.addEventListener('mousemove' , ()=> clone.classList.add('hover'));
+    document.addEventListener('mousedown' , ()=> {clone.addEventListener('mousemove' , activeHover) });
+    document.addEventListener('mouseup' , ()=> {clone.removeEventListener('mousemove' , activeHover) });
+    
 }
-
 
 function setSquares () {
     size = prompt('how many squares per side?');
@@ -25,28 +30,20 @@ function setSquares () {
         square.style.height = `${500/size}px`
         removeSquares()
 
-    for (i=0 ; i<size*size ; i++) {
+
+        for (i=0 ; i<size*size ; i++) {
+            function activeHover (e) {
+                clone.classList.add('hover')
+            }
         
-        const clone = square.cloneNode(true);
-        container.appendChild(clone);
-        
-        clone.addEventListener('mousemove' , ()=> clone.classList.add('hover'));
-    }
-    // container.style.width = `${size*16}px`
-    // container.style.height = `${size*16}px`
+            const clone = square.cloneNode(true);
+            container.appendChild(clone);
+            document.addEventListener('mousedown' , ()=> {clone.addEventListener('mousemove' , activeHover) });
+            document.addEventListener('mouseup' , ()=> {clone.removeEventListener('mousemove' , activeHover) });
+            
+        }
 }
-const elementos = document.querySelectorAll(".square")
-console.log(elementos);
 }
-
-
-
-
-// container.style.width = `${size*16}px`
-// container.style.height = `${size*16}px`
-// container.style.backgroundColor = `yellow`
-// console.log(container);
-
 const btn = document.querySelector("#btn");
 btn.addEventListener('click' , setSquares);
 
